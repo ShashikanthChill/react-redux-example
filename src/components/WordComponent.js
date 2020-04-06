@@ -1,19 +1,26 @@
 import React from "react";
 import { connect } from "react-redux";
+import { deleteWord } from "../actions/DeleteWordAction";
 
 const Word = (props) => {
-    console.log(props);
-
     return (
-        <p>{props.word.word}</p>
+        <p key={props.word.id} onClick={() => { props.deleteWord(props.word.id); props.history.push("/") }}>{props.word.word}</p>
     )
 }
 
 const mapStateToProps = (state, ownProps) => {
-    let id = ownProps.match.params.wordId;
+    let id = ownProps.match.params.wordId
     return {
-        word: state.words[id - 1]
+        word: state.words.find(word => word.id == id)
     }
 }
 
-export default connect(mapStateToProps)(Word)
+const mapDispatchToPros = (dispatch) => {
+    return {
+        deleteWord: (id) => {
+            dispatch(deleteWord(id))
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToPros)(Word)

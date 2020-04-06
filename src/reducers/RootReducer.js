@@ -9,6 +9,13 @@ const initState = {
 }
 
 const rootReducer = (state = initState, action) => {
+    if (action.type === "DELETE_WORD") {
+        let updatedWords = state.words.filter(word => word.id !== action.id);
+        return {
+            ...state,
+            words: updatedWords
+        }
+    }
     return state;
 }
 
