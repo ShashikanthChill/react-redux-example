@@ -2,22 +2,18 @@ import React from "react";
 import { connect } from "react-redux";
 
 const Word = (props) => {
-    const words = props.words.map(word => {
-        console.log(word.word);
-        return (
-            <li key={word.id}>{word.word}</li>
-        )
-    });
+    console.log(props);
 
     return (
-        <ul>
-            {words}
-        </ul>
+        <p>{props.word.word}</p>
     )
 }
 
-const mapStateToProps = (state) => {
-    return { words: state.words }
+const mapStateToProps = (state, ownProps) => {
+    let id = ownProps.match.params.wordId;
+    return {
+        word: state.words[id - 1]
+    }
 }
 
-export default connect(mapStateToProps)(Word);
+export default connect(mapStateToProps)(Word)

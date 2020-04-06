@@ -1,12 +1,18 @@
 import React from 'react';
-import Word from "./components/WordComponent";
+import { Route } from 'react-router';
+import WordComponent from './components/WordComponent';
+import WordsList from "./components/WordListComponent";
+import { BrowserRouter } from "react-router-dom";
 
 
 function App() {
   return (
-    <div className="App">
-      <Word />
-    </div>
+    <BrowserRouter>
+      <div className="App">
+        <Route path="/:wordId" component={WordComponent} />
+        <Route exact path="/" component={WordsList} />
+      </div>
+    </BrowserRouter>
   );
 }
 
